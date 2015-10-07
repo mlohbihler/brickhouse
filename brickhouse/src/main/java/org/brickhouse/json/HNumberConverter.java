@@ -1,3 +1,10 @@
+/* 
+ * Copyright (c) 2015, Matthew Lohbihler
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 package org.brickhouse.json;
 
 import java.io.IOException;
@@ -31,7 +38,8 @@ public class HNumberConverter implements ClassConverter {
 
         // Check if we can just write a number.
         if (StringUtils.isEmpty(h.getUnit()) && h != HNumber.NaN && h != HNumber.NEG_INF && h != HNumber.POS_INF)
-            writer.append((new DecimalFormat("#0.####", new DecimalFormatSymbols(Locale.ENGLISH))).format(h.getValue()));
+            writer.append(
+                    (new DecimalFormat("#0.####", new DecimalFormatSymbols(Locale.ENGLISH))).format(h.getValue()));
         else {
             StringBuilder sb = new StringBuilder().append(CODE).append(HValueConverter.ESCAPE);
             if (Double.isNaN(h.getValue()))
@@ -41,7 +49,8 @@ public class HNumberConverter implements ClassConverter {
             else if (h.getValue() == Double.POSITIVE_INFINITY)
                 sb.append("INF");
             else
-                sb.append((new DecimalFormat("#0.####", new DecimalFormatSymbols(Locale.ENGLISH))).format(h.getValue()));
+                sb.append(
+                        (new DecimalFormat("#0.####", new DecimalFormatSymbols(Locale.ENGLISH))).format(h.getValue()));
 
             if (!StringUtils.isEmpty(h.getUnit()))
                 sb.append(h.getUnit());

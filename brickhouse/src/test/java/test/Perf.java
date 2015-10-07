@@ -1,3 +1,10 @@
+/* 
+ * Copyright (c) 2015, Matthew Lohbihler
+ * 
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 package test;
 
 import static org.brickhouse.filter.Filter.has;
@@ -40,9 +47,9 @@ public class Perf {
 
     static final String[] dii = { "doc", "dopey", "bashful", "grumpy", "sneezy", "sleepy", "happy" };
 
-    static final String[] markers = { "alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel",
-            "india", "juliet", "kilo", "lima", "mike", "november", "oscar", "papa", "quebec", "romeo", "sierra",
-            "tango", "uniform", "victor", "whiskey", "xray", "yankee", "zulu" };
+    static final String[] markers = { "alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel", "india",
+            "juliet", "kilo", "lima", "mike", "november", "oscar", "papa", "quebec", "romeo", "sierra", "tango",
+            "uniform", "victor", "whiskey", "xray", "yankee", "zulu" };
 
     JdbcTemplate jt;
     Table table;
@@ -134,31 +141,31 @@ public class Perf {
         timer.start();
         table.readAll(Filter.ALL, row -> {
             timer.mark("read1.row");
-        }, true);
+        } , true);
         timer.mark("read1");
 
         timer.start();
         table.readAll(has(markers[0]), row -> {
             timer.mark("read2.row");
-        }, true);
+        } , true);
         timer.mark("read2");
 
         timer.start();
         table.readAll(has(markers[1]).and(has(markers[2])), row -> {
             timer.mark("read3.row");
-        }, true);
+        } , true);
         timer.mark("read3");
 
         timer.start();
         table.readAll(has(markers[3]).and(Filter.gt("number", new HNumber(50))), row -> {
             timer.mark("read4.row");
-        }, true);
+        } , true);
         timer.mark("read4");
 
         timer.start();
         table.readAll(has("rowRef->" + markers[4]), row -> {
             timer.mark("read5.row");
-        }, true);
+        } , true);
         timer.mark("read5");
     }
 
@@ -184,7 +191,7 @@ public class Perf {
                     return batch.size();
                 }
             });
-        }, false);
+        } , false);
         timer.mark("indexUpdate");
     }
 
