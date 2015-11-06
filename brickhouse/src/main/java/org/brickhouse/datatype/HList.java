@@ -71,6 +71,14 @@ public class HList extends HValue {
         return (T) list.get(index);
     }
 
+    public boolean contains(HValue value) {
+        return list.contains(value);
+    }
+
+    public int indexOf(HValue value) {
+        return list.indexOf(value);
+    }
+
     public HList delete(HValue value) {
         list.remove(value);
         return this;
